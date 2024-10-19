@@ -1,0 +1,19 @@
+name: Deploy Website
+
+on:
+  push:
+    branches: [main]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install NodeJS
+      uses: actions/setup-node@v3
+      with:
+        node-version: 12
+    - name: Install Surge
+      run: npm install -g surge
+    - name: Run Surge
+      run: surge ./ zakriyafarid.surge.sh --token ${{ secret.SURGE_TOKEN }} 
+      
